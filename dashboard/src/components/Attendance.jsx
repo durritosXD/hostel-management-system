@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { attendanceData } from '../data/hostelData';
 import BarChartComponent from './charts/BarChart';
 
-const Attendance = () => {
+const Attendance = ({ currentUser, isStudentView = false }) => {
   const [isCapturing, setIsCapturing] = useState(false);
   const [captureStatus, setCaptureStatus] = useState('');
   const [attendance, setAttendance] = useState([]);
@@ -10,6 +10,8 @@ const Attendance = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
+  
+  const isStudent = isStudentView || currentUser?.role === 'Student';
 
   // Mock attendance data for the current date
   useEffect(() => {
@@ -87,6 +89,86 @@ const Attendance = () => {
     setIsCapturing(false);
     setFaceDetected(false);
   };
+
+  // Get student's own attendance record
+  const getStudentAttendance = () => {
+    if (!currentUser || !isStudent) return [];
+    return [
+      { date: '2025-08-08', status: 'Present', time: '08:30 AM' },
+      { date: '2025-08-07', status: 'Present', time: '08:45 AM' },
+      { date: '2025-08-06', status: 'Absent', time: '-' },
+      { date: '2025-08-05', status: 'Present', time: '08:25 AM' },
+      { date: '2025-08-04', status: 'Present', time: '08:40 AM' },
+      { date: '2025-08-03', status: 'Present', time: '08:35 AM' },
+      { date: '2025-08-02', status: 'Present', time: '08:28 AM' },
+    ];
+  };
+
+  const studentAttendance = getStudentAttendance();
+  const presentDays = studentAttendance.filter(day => day.status === 'Present').length;
+  const totalDays = studentAttendance.length;
+  const attendancePercentage = Math.round((presentDays / totalDays) * 100);
+
+  if (isStudent) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-2xl font-semibold text-gray-800">My Attendance</h1>
+        
+        {/* Student Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-medium text-gray-800 mb-2">Total Present Days</h3>
+            <p className="text-3xl font-bold text-green-600">{presentDays}</p>
+            <p className="text-sm text-gray-500">out of {totalDays} days</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-medium text-gray-800 mb-2">Attendance Rate</h3>
+            <p className="text-3xl font-bold text-blue-600">{attendancePercentage}%</p>
+            <p className="text-sm text-gray-500">This month</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-medium text-gray-800 mb-2">Status</h3>
+            <p className="text-3xl font-bold text-green-600">Present</p>
+            <p className="text-sm text-gray-500">Today - {new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+        
+        {/* Recent Attendance */}
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h2 className="text-lg font-medium text-gray-800 mb-4">Recent Attendance (Last 7 Days)</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {studentAttendance.map((record, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {new Date(record.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{record.time}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                        ${record.status === 'Present' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        {record.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

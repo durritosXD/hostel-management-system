@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { mockUsers } from '../data/hostelData';
 
-const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
+const Login = ({ onLogin, onSwitchToRegister }) => {
+  const [loginField, setLoginField] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = mockUsers.find(u => u.email === email && u.password === password);
+    // Support both username and email login
+    const user = mockUsers.find(u => 
+      (u.email === loginField || u.username === loginField) && u.password === password
+    );
     
     if (user) {
       onLogin(user);
     } else {
-      setError('Invalid email or password');
+      setError('Invalid credentials. Please check your username/email and password.');
     }
   };
 
@@ -36,17 +39,17 @@ const Login = ({ onLogin }) => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email-address" className="sr-only">Email address</label>
+              <label htmlFor="login-field" className="sr-only">Username or Email</label>
               <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
+                id="login-field"
+                name="loginField"
+                type="text"
+                autoComplete="username"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Username or Email"
+                value={loginField}
+                onChange={(e) => setLoginField(e.target.value)}
               />
             </div>
             <div>
@@ -74,15 +77,33 @@ const Login = ({ onLogin }) => {
             </button>
           </div>
           
-          <div className="text-sm text-center">
-            <p className="text-gray-600">
+          <div className="text-center">
+            {onSwitchToRegister && (
+              <button
+                type="button"
+                onClick={onSwitchToRegister}
+                className="font-medium text-indigo-600 hover:text-indigo-500 mb-4"
+              >
+                Don't have an account? Register here
+              </button>
+            )}
+          </div>
+          
+          <div className="text-sm text-center space-y-1">
+            <p className="text-gray-600 font-medium">
               Demo Credentials:
             </p>
             <p className="text-gray-500">
-              Admin: admin@hostel.com / admin123
+              <strong>Admin:</strong> admin / admin123
             </p>
             <p className="text-gray-500">
-              Student: john@example.com / password
+              <strong>Teacher:</strong> teacher / teacher123
+            </p>
+            <p className="text-gray-500">
+              <strong>Student:</strong> student1 / student123
+            </p>
+            <p className="text-gray-500">
+              <strong>Warden:</strong> warden / warden123
             </p>
           </div>
         </form>

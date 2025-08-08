@@ -9,9 +9,8 @@ export const hostelStats = [
     change: '12%',
     trend: 'up',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
+      // Using string representation instead of JSX for SVG
+      '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>'
     ),
   },
   {
@@ -21,9 +20,8 @@ export const hostelStats = [
     change: '3%',
     trend: 'up',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-      </svg>
+      // Using string representation instead of JSX for SVG
+      '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>'
     ),
   },
   {
@@ -33,9 +31,8 @@ export const hostelStats = [
     change: '5%',
     trend: 'down',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
+      // Using string representation instead of JSX for SVG
+      '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>'
     ),
   },
   {
@@ -45,9 +42,8 @@ export const hostelStats = [
     change: 'Same',
     trend: 'neutral',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-      </svg>
+      // Using string representation instead of JSX for SVG
+      '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>'
     ),
   },
 ];
@@ -94,7 +90,8 @@ export const recentLeaves = [
     endDate: '2025-08-12',
     reason: 'Family function',
     status: 'Approved', 
-    createdAt: '2025-08-05T10:30:00Z'
+    createdAt: '2025-08-05T10:30:00Z',
+    type: 'leave'
   },
   { 
     id: 2, 
@@ -212,6 +209,34 @@ export const mockUsers = [
     name: 'Sarah Johnson',
     role: 'Staff',
     email: 'staff@university.edu'
+  },
+  {
+    id: 4,
+    username: 'teacher',
+    password: 'teacher123',
+    name: 'Dr. Michael Thompson',
+    role: 'Teacher',
+    email: 'teacher@university.edu'
+  },
+  {
+    id: 5,
+    username: 'student1',
+    password: 'student123',
+    name: 'John Doe',
+    role: 'Student',
+    email: 'john.doe@student.university.edu',
+    roomNumber: 'A-101',
+    studentId: 'STU001'
+  },
+  {
+    id: 6,
+    username: 'student2',
+    password: 'student123',
+    name: 'Jane Smith',
+    role: 'Student',
+    email: 'jane.smith@student.university.edu',
+    roomNumber: 'B-205',
+    studentId: 'STU002'
   }
 ];
 
@@ -227,4 +252,99 @@ export const studentAttendanceRecords = [
   { id: 8, name: 'Laura Wilson', room: 'A-105', status: 'Present', date: '2025-08-08', time: '08:29 AM' },
   { id: 9, name: 'James Taylor', room: 'D-201', status: 'Present', date: '2025-08-08', time: '08:33 AM' },
   { id: 10, name: 'Emily Clark', room: 'B-301', status: 'Present', date: '2025-08-08', time: '08:30 AM' },
+];
+
+// Outing passes data
+export const outingPasses = [
+  {
+    id: 1,
+    student: 'John Doe',
+    room: 'A-101',
+    outDate: '2025-08-08',
+    outTime: '14:00',
+    expectedReturn: '18:00',
+    destination: 'City Mall',
+    purpose: 'Shopping for supplies',
+    status: 'Approved',
+    createdAt: '2025-08-08T09:30:00Z',
+    approvedBy: 'James Wilson',
+    type: 'outing'
+  },
+  {
+    id: 2,
+    student: 'Jane Smith',
+    room: 'B-205',
+    outDate: '2025-08-09',
+    outTime: '10:00',
+    expectedReturn: '16:00',
+    destination: 'Hospital',
+    purpose: 'Medical checkup',
+    status: 'Pending',
+    createdAt: '2025-08-08T15:45:00Z',
+    type: 'outing'
+  },
+  {
+    id: 3,
+    student: 'Robert Johnson',
+    room: 'C-103',
+    outDate: '2025-08-10',
+    outTime: '09:00',
+    expectedReturn: '17:00',
+    destination: 'Library',
+    purpose: 'Research work',
+    status: 'Approved',
+    createdAt: '2025-08-07T12:20:00Z',
+    approvedBy: 'Dr. Michael Thompson',
+    type: 'outing'
+  }
+];
+
+// Enhanced missing items with image support
+export const enhancedMissingItems = [
+  {
+    id: 1,
+    student: 'John Doe',
+    room: 'A-101',
+    item: 'Laptop Charger',
+    description: 'Dell charger with blue tag, 90W power adapter',
+    location: 'Library - 2nd Floor',
+    category: 'Electronics',
+    status: 'Missing',
+    reportedAt: '2025-08-06T10:30:00Z',
+    images: [
+      '/images/charger1.jpg',
+      '/images/charger2.jpg'
+    ],
+    contactInfo: 'john.doe@student.university.edu'
+  },
+  {
+    id: 2,
+    student: 'Jane Smith',
+    room: 'B-205',
+    item: 'Water Bottle',
+    description: 'Blue Hydro Flask with university stickers',
+    location: 'Sports Field',
+    category: 'Personal Items',
+    status: 'Found',
+    reportedAt: '2025-08-05T09:15:00Z',
+    foundAt: '2025-08-06T14:20:00Z',
+    foundBy: 'Security Guard',
+    images: [
+      '/images/bottle1.jpg'
+    ],
+    contactInfo: 'jane.smith@student.university.edu'
+  },
+  {
+    id: 3,
+    student: 'Robert Johnson',
+    room: 'C-103',
+    item: 'Textbook',
+    description: 'Engineering Mathematics Vol. 2 by K.A. Stroud',
+    location: 'Cafeteria - Table near window',
+    category: 'Books',
+    status: 'Missing',
+    reportedAt: '2025-08-07T14:45:00Z',
+    images: [],
+    contactInfo: 'robert.johnson@student.university.edu'
+  }
 ];

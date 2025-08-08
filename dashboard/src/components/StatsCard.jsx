@@ -8,9 +8,10 @@ const StatsCard = ({ title, value, change, trend, icon }) => {
           <p className="text-sm font-medium text-gray-500">{title}</p>
           <p className="text-2xl font-semibold text-gray-900 mt-1">{value}</p>
         </div>
-        <div className={`rounded-full p-2 ${trend === 'up' ? 'bg-green-100' : trend === 'down' ? 'bg-red-100' : 'bg-blue-100'}`}>
-          {icon}
-        </div>
+        <div 
+          className={`rounded-full p-2 ${trend === 'up' ? 'bg-green-100' : trend === 'down' ? 'bg-red-100' : 'bg-blue-100'}`}
+          dangerouslySetInnerHTML={{ __html: icon }}
+        />
       </div>
       {change && (
         <div className="mt-3 flex items-center text-xs">
